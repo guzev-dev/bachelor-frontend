@@ -3,10 +3,12 @@
 Цей проєкт є частиною моєї дипломної/кваліфікаційної роботи для отримання
 ступеня бакалавра. Він являє собою клієнтський застосунок для вебсайту гуманітарної допомоги.
 
+Фреймворк: Angular.
+
 ### [Серверна частина кваліфікаційної роботи](https://github.com/guzev-dev/bachelor-backend)
 
 ## Деякі особливості:
-* зручний UX:
+* зручний UI:
 
 ![charity-screenshot](https://drive.google.com/uc?export=view&id=1fTdMKAK4bmkbhF60UPfLLydc_XJZzjmz)
 
