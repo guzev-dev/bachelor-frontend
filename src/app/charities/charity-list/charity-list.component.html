@@ -1,0 +1,77 @@
+<div class="p-3 me-0 row mx-lg-4 mx-0">
+
+  <div class="col-xxl-2 col-lg-3 col-12 side-menu" [ngClass]="{'right': sideMenuRight}">
+
+
+    <div class="position-sticky category-menu p-2">
+      <div class="row">
+        <div class="col-lg-12 col-11">
+          <input type="text" class="form-control fw-bold" placeholder="Знайти збір за назвою"
+                 [(ngModel)]="charityName" (input)="onSearch()">
+        </div>
+        <div class="col-1 d-lg-none" (click)="changeMobileMenuHidden()">
+          <span class="bi bi-caret-down fs-3" *ngIf="mobileMenuHidden"></span>
+          <span class="bi bi-caret-up-fill fs-3" *ngIf="!mobileMenuHidden"></span>
+        </div>
+      </div>
+
+      <div [ngClass]="{'categories-hidden': mobileMenuHidden}">
+        <h1 class="sub-text mt-3 fw-bold">
+          Категорії
+          <button type="button" class="border-0 mt-1 float-end clear-btn" *ngIf="selectedCategory"
+                  (click)="clearSelectedCategory()">Х
+          </button>
+        </h1>
+
+        <div *ngFor="let category of categories;">
+          <input type="radio" [id]="category.name" name="category" class="me-3"
+                 [(ngModel)]="selectedCategory" (change)="onCategorySelect()"
+                 [value]="category.name">
+          <label [for]="category.name" class="sub-text fs-3 fw-light">{{category.name}}</label>
+          <span [class]="category.iconClass" class="bi fs-3 float-end sub-text"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-xxl-10 col-lg-9 col-12 py-2">
+
+    <div class="col-12 mb-3">
+      <div class="text-end">
+
+        <div class="sub-text fs-4 d-inline-block">
+          <label class="me-2" for="show">Відображати: </label>
+          <select name="sort" id="show" [(ngModel)]="selectedStatus" (change)="onStatusSelect()">
+            <option *ngFor="let option of statusSelect" [selected]="option === selectedStatus">{{option}}</option>
+          </select>
+        </div>
+
+        <div class="sub-text fs-4 d-inline-block ms-4">
+          <label class="me-2" for="sort">Сортувати: </label>
+          <select name="sort" id="sort" [(ngModel)]="selectedOrder" (change)="onSortOrderSelect()">
+            <option *ngFor="let option of sortOrderSelect" [selected]="option === selectedOrder">{{option}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row charity-list-box">
+      <div class="col-xxl-4 col-lg-6 col-12" *ngFor="let charity of charities.value">
+        <app-charity-item [charityItem]="charity">
+
+        </app-charity-item>
+      </div>
+
+      <div class="col-12 text-center fs-3">
+        <button class="btn-custom sub-text px-3" [disabled]="charities.firstPage" (click)="onPreviousPage()">
+          <
+        </button>
+        |
+        <button class="btn-custom sub-text px-3" [disabled]="charities.lastPage" (click)="onNextPage()">
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

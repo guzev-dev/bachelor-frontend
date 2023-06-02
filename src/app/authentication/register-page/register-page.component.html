@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row" style="margin-top: 5vh;">
+    <div class="col-12 col-lg-4 offset-lg-4">
+      <h1 class="main-text page-header">Реєстрація акаунту</h1>
+
+      <form [formGroup]="registerForm">
+        <input type="text" class="form-control w-100 mt-3 fs-2 fw-bold" placeholder="Ім'я" formControlName="firstName">
+        <input type="text" class="form-control w-100 mt-3 fs-2 fw-bold" placeholder="Прізвище" formControlName="lastName">
+        <input type="text" class="form-control w-100 mt-3 fs-2 fw-bold" placeholder="Електронна пошта" formControlName="email">
+        <input type="password" class="form-control w-100 mt-3 fs-2" placeholder="Пароль" formControlName="password">
+        <input type="password" class="form-control w-100 mt-3 fs-2" placeholder="Повторіть пароль" formControlName="passwordCheck">
+      </form>
+      <p class="text-end"><a class="sub-text fs-5" (click)="secretCodeModal = true;">Ввести код активації</a></p>
+
+            <div class="alert-custom--error p-3" *ngIf="passwordInvalid() || passwordCheckInvalid() || !passwordsMatch() || error">
+              <p class="sub-text mb-0 fs-4">Помилка</p>
+              <ul class="fs-5 mb-0">
+                <li class="sub-text text-decoration-underline" *ngIf="passwordInvalid() || passwordCheckInvalid()">Мінімальна довжина паролю - 8 символів.</li>
+                <li class="sub-text text-decoration-underline" *ngIf="!passwordsMatch()">Паролі не збігаються.</li>
+                <li class="sub-text text-decoration-underline" *ngIf="error">{{error}}</li>
+              </ul>
+            </div>
+
+      <div class="text-center mt-3">
+        <button class="btn-custom fs-2 sub-text py-2 px-4" (click)="onRegister()">Зареєструватися</button>
+      </div>
+
+      <div class="text-divider d-flex justify-content-center mt-3">
+        <p class="mt-5 sub-text fs-3 text-center">Вже є акаунт?</p>
+      </div>
+
+      <div class="text-center mb-4">
+        <a class="fs-3 sub-text p-2" [routerLink]="'../login'">Увійти</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="secretCodeModal">
+  <div class="secret-code-input-modal" (click)="secretCodeModal = false;">
+  </div>
+  <div class="secret-code-input-box p-3">
+    <h2 class="main-text mt-3" style="text-align: justify">Введіть секретний код для підтвердження реєстрації</h2>
+    <hr>
+    <p class="sub-text fs-2 fst-italic mb-2" style="text-align: justify;">На вказану вами при реєстрації пошту надіслано
+      лист з секретним кодом для підтвердження реєстрації.</p>
+    <form class="row" [formGroup]="confirmRegisterForm">
+      <div class="col-xl-6 col-12 offset-xl-3">
+        <input type="text" class="form-control w-100 mt-3 fs-2 fw-bold text-center" placeholder="Електронна пошта" formControlName="email">
+        <input type="text" class="form-control w-100 mt-3 fs-2 fw-bold text-center" placeholder="Секретний код" formControlName="secretCode">
+      </div>
+
+      <div class="col-12 text-center mt-4">
+        <button type="button" class="btn-custom sub-text p-3 fs-3" (click)="onConfirmRegister()">Підтвердити реєстрацію</button>
+      </div>
+    </form>
+  </div>
+</div>

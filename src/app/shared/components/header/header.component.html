@@ -1,0 +1,46 @@
+<div class="row header-container m-0">
+  <div class="header-title col-lg-4 col-12">
+    <span class="main-text">Сайт Гуманітарної Допомоги</span>
+  </div>
+
+  <div class="offset-lg-2 col-lg-6 col-12 row header-menu">
+    <div class="offset-lg-2 col-lg-3 col-12 text-center header-item h-auto" [routerLink]="'/funds'" routerLinkActive="active">
+      <p class="mb-0 header-text">Фонди</p>
+    </div>
+    <div class="col-lg-3 col-12 text-center header-item h-auto" [routerLink]="'/charity'" routerLinkActive="active">
+      <p class="mb-0 header-text">Збори</p>
+    </div>
+    <div class="col-lg-3 col-12 text-center header-item h-auto" [routerLink]="'/account'" routerLinkActive="active">
+      <p class="mb-0 header-text">Особистий акаунт</p>
+    </div>
+    <div class="col-lg-1 col-12 text-center header-item h-auto options">
+      <div class="position-relative">
+        <p class="mb-0">
+          <a class="bi bi-gear header-text"></a>
+        </p>
+
+        <table class="options-menu fs-4 sub-text px-3 py-2">
+          <tr class="clickable" (click)="onChangeTheme()">
+            <td class="text-start">
+              <span class="me-3">Тема сайту:</span>
+            </td>
+            <td class="text-end">
+              <span *ngIf="theme === 'dark'">Темна <span class="bi bi-moon"></span></span>
+              <span *ngIf="theme === 'default'">Світла <span class="bi bi-sun"></span></span>
+            </td>
+          </tr>
+          <tr class="d-none d-lg-table-row clickable" (click)="onChangeSideBarPosition()">
+            <td class="text-start">
+              <span class="me-3">Меню пошуку:</span>
+            </td>
+            <td class="text-end">
+              <span *ngIf="sideBarPosition === 'left'">Зліва <span class="bi bi-layout-sidebar-inset"></span></span>
+              <span *ngIf="sideBarPosition === 'right'">Справа <span class="bi bi-layout-sidebar-inset-reverse"></span></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+.fund-image {
+  height: 30vh;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  float: right;
+  margin: 5px 10px 5px 15px;
+  filter: drop-shadow(10px 10px 2px rgba(0, 0, 0, 0.5));
+}
+
+.fund-text {
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.info-box {
+  border-radius: 15px;
+  border: 1px solid var(--header-color);
+  color: var(--header-color) !important;
+  position: relative;
+}
+
+.info-box:after {
+  content: 'Інформація';
+  position: absolute;
+  top: -20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  left: 5%;
+  background-color: var(--bg-color);
+  z-index: 1;
+}
+
+.info-box.contact-info:after {
+  content: 'Контактна інформація';
+}
+
+.info-text {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.charity-list-box {
+  padding: 1vh 0vw 5vh 2vw;
+}
+
+@media (max-width: 991px) {
+  .fund-image {
+    width: 95vw;
+    aspect-ratio: 1 / 1;
+  }
+
+  .charity-list-box {
+    padding: 2vh 0vw 5vh 14vw;
+    margin-right: 0;
+  }
+}

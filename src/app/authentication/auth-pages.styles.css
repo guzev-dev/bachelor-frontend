@@ -1,0 +1,32 @@
+.page-header {
+  color: var(--sub-text-color) !important;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.text-divider {
+  position: relative;
+}
+
+.text-divider:after {
+  content: "";
+  border-top: 1px solid var(--sub-text-color);
+  background-color: transparent;
+  width: 100%;
+  position: absolute;
+  top: 4.3rem;
+  left: 0;
+  z-index: -1;
+}
+
+.text-divider p {
+  z-index: 2;
+  background-color: var(--bg-color);
+  width: fit-content;
+  padding: 0 5px;
+}
+
+a:hover {
+  color: var(--hover-color);
+  opacity: 75%;
+}

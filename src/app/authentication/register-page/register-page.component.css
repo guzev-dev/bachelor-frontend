@@ -1,0 +1,34 @@
+.secret-code-input-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100 !important;
+  background-color: black;
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.secret-code-input-box {
+  position: fixed;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: fit-content;
+  opacity: 100%;
+  z-index: 101 !important;
+  background-color: var(--bg-color);
+  border-radius: 15px;
+}
+
+.secret-code-input-box .main-text {
+  color: var(--sub-text-color);
+}
+
+@media (max-width: 991px) {
+  .secret-code-input-box {
+    left: 2.5vw;
+    width: 95vw;
+  }
+}

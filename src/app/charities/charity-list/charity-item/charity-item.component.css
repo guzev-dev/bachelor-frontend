@@ -1,0 +1,170 @@
+
+.charity-box {
+  transition: transform .2s;
+  cursor: pointer;
+}
+
+.charity-info {
+  position: absolute;
+  top: 2vh;
+  height: 60vh;
+  width: 85%;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: box-shadow .5s;
+}
+
+.charity-info:after {
+  background-color: var(--box-hover);
+  opacity: 5%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 60vh;
+  width: 0;
+  transition: width .5s;
+  overflow: hidden;
+}
+
+.charity-image {
+  position: absolute;
+  left: 1vw;
+  top: 0;
+  height: 29.6vh;
+  aspect-ratio: 1.4 / 1;
+  width: 85%;
+  background-color: black;
+  border-radius: 20%;
+}
+
+.charity-image img {
+  height: 29.6vh;
+  width: 100%;
+  opacity: 80%;
+  filter: brightness(110%);
+  transition: opacity .5s;
+  border-radius: 20%;
+}
+
+.charity-info .charity-title {
+  margin-top: 28vh;
+  margin-bottom: .1vh;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 3vh;
+  line-height: 3.4vh;
+  height: 6.8vh;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: justify;
+  color: var(--sub-text-color);
+  transition: color .3s .2s;
+}
+
+.charity-info .charity-category {
+  font-family: "Alumni Sans", sans-serif;
+  font-size: 2vh;
+  text-align: end;
+  margin-top: .1vh;
+  margin-bottom: .1vh;
+  color: var(--sub-text-color);
+  transition: color .3s .2s, opacity .3s .2s;
+  opacity: 60%;
+}
+
+.charity-info .charity-description{
+  font-family: "Alumni Sans", sans-serif;
+  font-size: 2vh;
+  font-style: italic;
+  line-height: 2vh;
+  text-align: justify;
+  max-height: 12vh;
+  margin-bottom: .1vh;
+  overflow: hidden;
+  color: var(--sub-text-color);
+  opacity: 70%;
+}
+
+.charity-info .charity-footer {
+  font-family: "Alumni Sans", sans-serif;
+  font-size: 2.25vh;
+  margin-top: .1vh;
+  margin-bottom: 0;
+  color: var(--sub-text-color);
+  transition: color .3s .2s, opacity .3s .2s;
+  opacity: 80%;
+}
+
+.charity-info .charity-votes {
+  position: absolute;
+  top: 53vh;
+  right: 5%;
+  width: 5ch;
+  text-align: center;
+  font-size: 1.75vh;
+  line-height: 1.75vh;
+  color: var(--box-hover-main-text);
+  opacity: 0;
+  transform: rotate(15deg);
+  transition: opacity .4s;
+}
+
+.charity-info .non-individual {
+  position: absolute;
+  top: 56.5vh;
+  right: 1%;
+  font-size: 1.75vh;
+  background-color: var(--header-color);
+  color: var(--main-text-color);
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.charity-box:hover {
+  transform: scale(1.1);
+  background-color: var(--bg-color);
+  z-index: 1 !important;
+}
+
+.charity-box:hover .charity-info {
+  box-shadow: .5rem .5rem 1rem var(--header-color);
+  background-color: var(--bg-color);
+}
+
+.charity-box:hover .charity-info:after {
+  width: 100%;
+}
+
+.charity-box:hover .charity-image img {
+  opacity: 100%;
+}
+
+.charity-box:hover .charity-info .charity-title {
+  color: var(--box-hover-main-text);
+}
+
+.charity-box:hover .charity-info .charity-category {
+  color: var(--box-hover-category);
+  opacity: 100%;
+}
+
+.charity-box:hover .charity-info .charity-footer {
+  color: var(--box-hover-main-text);
+  opacity: 100%;
+}
+
+.charity-box:hover .charity-info .charity-votes {
+  opacity: 100%;
+}
+
+@media (max-width: 991px) {
+  .charity-box {
+    height: 62vh;
+  }
+
+  .charity-box:after {
+    height: 62vh;
+  }
+}

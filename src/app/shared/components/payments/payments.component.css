@@ -1,0 +1,25 @@
+.payments-border {
+  border: 1px solid var(--sub-text-color);
+  overflow-wrap: break-word !important;
+}
+
+.payments-border__top-left {
+  border-top-left-radius: 10px;
+}
+
+.payments-border__top-right {
+  border-top-right-radius: 10px;
+}
+
+.payments-border__bottom-left {
+  border-bottom-left-radius: 10px;
+}
+
+.payments-border__bottom-right {
+  border-bottom-right-radius: 10px;
+}
+
+.payment-charity:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,6 @@
+<div class="row sub-text fs-4">
+  <div class="d-flex document-box" *ngFor="let document of documents" (click)="documentClick(document)">
+    <p class="col-10 text-decoration-underline mb-0">{{document.name + document.extension}}</p>
+    <p class="col-2 text-center mb-0"><span class="bi bi-download"></span></p>
+  </div>
+</div>

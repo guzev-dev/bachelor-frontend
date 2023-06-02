@@ -1,0 +1,100 @@
+.charity-box {
+  margin-bottom: calc(10vh);
+}
+
+.charity-button {
+  bottom: 0;
+  height: calc(10vh);
+  background-color: var(--bg-color);
+}
+
+.charity-image {
+  height: 30vh;
+  aspect-ratio: 1.6 / 1;
+  border-radius: 10px;
+  float: left;
+  margin: 5px 15px 5px 0;
+}
+
+.charity-text {
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.info-box {
+  border-radius: 15px;
+  border: 1px solid var(--header-color);
+  color: var(--header-color) !important;
+  position: relative;
+}
+
+.info-box:after {
+  content: 'Інформація';
+  position: absolute;
+  top: -20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  left: 5%;
+  background-color: var(--bg-color);
+  z-index: 1;
+}
+
+.vote-info-box {
+  display: none;
+}
+
+.clickable:hover ~ .vote-info-box {
+  display: block;
+  list-style-type: none;
+  position: absolute;
+  bottom: 2vh;
+  left: 1vw;
+  border-radius: 5px;
+  width: min(35vw, 25ch);
+  border: 1px solid var(--box-hover-main-text);
+  background-color: var(--bg-color);
+  padding: 5px;
+  text-align: justify;
+}
+
+
+.donate-input-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100 !important;
+  background-color: black;
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.donate-input-box {
+  position: fixed;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: fit-content;
+  opacity: 100%;
+  z-index: 101 !important;
+  background-color: var(--bg-color);
+  border-radius: 15px;
+}
+
+.donate-input-box .main-text {
+  color: var(--sub-text-color);
+}
+
+@media (max-width: 991px) {
+  .charity-image {
+    width: 95vw;
+    aspect-ratio: 1.6 / 1;
+  }
+
+  .donate-input-box {
+    left: 2.5vw;
+    top: 5vh;
+    width: 95vw;
+  }
+}

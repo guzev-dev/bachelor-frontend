@@ -1,0 +1,21 @@
+<div style="height: 70vh;" *ngIf="charityItem">
+  <div class="position-relative charity-box" [routerLink]="['/charity', charityItem.id]">
+    <div class="charity-info p-2">
+      <p class="charity-title">{{charityItem.name}}</p>
+      <p class="charity-category">{{charityItem.category.name}} <span class="bi ms-2" [ngClass]="charityItem.category.iconClass"></span></p>
+      <hr class="mt-0 mb-2">
+      <p class="charity-description">{{charityItem.description}}</p>
+      <hr class="mt-2 mb-0">
+      <p class="charity-footer">До: {{toUADateFormat(charityItem.endDate)}}.</p>
+      <p class="charity-footer">Зібрано: {{charityItem.collected}}/{{charityItem.needToCollect}}</p>
+      <p class="charity-votes sub-text">Голоси: {{charityItem.upvotes}}</p>
+      <p class="non-individual sub-text" *ngIf="charityItem.individual === false">Від фонду</p>
+    </div>
+
+    <div class="charity-image">
+      <img
+        [src]="(imgURL) ? imgURL : './assets/images/no-image.png'"
+        alt="charity-photo">
+    </div>
+  </div>
+</div>

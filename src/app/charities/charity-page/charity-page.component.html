@@ -1,0 +1,158 @@
+<div class="container-fluid">
+  <div class="row charity-box" *ngIf="charity">
+    <div class="offset-xl-2 col-xl-8 col-12 mt-4">
+      <h1 class="main-text--sub-color text-center"
+          style="font-size: 4rem; text-align: justify; letter-spacing: .1rem;">{{charity.name}}</h1>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-xl-8 col-12">
+          <img class="charity-image" [src]="imgURL" alt="charity-image" *ngIf="imgURL">
+          <p class="sub-text charity-text fs-3 pe-3">{{charity.description}}</p>
+        </div>
+
+        <div class="col-xl-4 col-12">
+          <div class="row">
+
+            <div class="col-12 info-box sub-text fs-3 mt-2 row mx-0">
+
+              <p class="mt-4 mb-0 overflow-wrap--break-word col-6">Категорія:</p>
+              <p class="mt-4 mb-0 overflow-wrap--break-word col-6 text-decoration-underline">
+                {{charity.category.name}}
+              </p>
+
+              <p class="mb-0 overflow-wrap--break-word col-6">Статус:</p>
+              <p
+                class="mb-0 overflow-wrap--break-word col-6 text-decoration-underline">{{charity.status.singleName}}</p>
+
+              <p class="mb-0 overflow-wrap--break-word col-6">Зібрано:</p>
+              <p class="mb-0 overflow-wrap--break-word col-6 text-decoration-underline">
+                {{numberWithSpaces(charity.collected.toFixed(0)) + '/' + numberWithSpaces(charity.needToCollect.toFixed(0))}}
+              </p>
+
+              <p class="mb-0 overflow-wrap--break-word col-6">Ініціатор:</p>
+              <p class="mb-0 overflow-wrap--break-word col-6">
+                <span *ngIf="charity.individual === false" class="text-decoration-underline">Фонд</span>
+                <span *ngIf="charity.individual === true" class="text-decoration-underline">Користувач</span>
+              </p>
+
+              <p class="mb-2 overflow-wrap--break-word col-6">Голоси:</p>
+              <div class="mb-2 overflow-wrap--break-word col-6">
+                <span class="text-decoration-underline">{{numberWithSpaces(charity.upvotes.toFixed(0))}}</span>
+                <div class="position-relative d-inline-block">
+                  <span class="bi bi-info-circle ms-3 fs-5 clickable"></span>
+                  <div class="vote-info-box fs-5 sub-text">Кожен авторизований користувач має можливість проголосувати
+                    за обраний
+                    збір один раз на день.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mx-0 px-0" *ngIf="canVote">
+              <hr class="mt-3">
+              <div class="row clickable" (click)="voteForCharity()">
+                <div class="col-10 text-center sub-text"><span class="fs-3">Проголосувати за збір</span></div>
+                <div class="col-2 text-center">
+                  <span class="bi bi-arrow-up-circle fs-3"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mx-0 px-0" *ngIf="charity.individual === false">
+              <hr class="mt-3">
+              <div class="row clickable" [routerLink]="['../../funds', charity.createdBy]">
+                <div class="col-10 text-center sub-text"><span class="fs-3">Перейти до фонду</span></div>
+                <div class="col-2 text-center">
+                  <span class="bi bi-link-45deg fs-3"></span>
+                </div>
+              </div>
+            </div>
+
+            <hr class="mt-3">
+            <div class="row mx-0 px-0 clickable" (click)="onOpenCloseDocumentsMenu()">
+              <div class="col-10 text-center sub-text"><span class="fs-3">Прикріплені файли</span></div>
+              <div class="col-2 text-center">
+                <span class="bi bi-caret-down fs-3" *ngIf="!documentsMenuOpen"></span>
+                <span class="bi bi-caret-up-fill fs-3" *ngIf="documentsMenuOpen"></span>
+              </div>
+            </div>
+            <div class="col-12 mt-3 overflow-hidden" [@menuInOut] *ngIf="documentsMenuOpen">
+              <app-documents [documents]="charity.documents"
+                             [onClick]="downloadDocumentFunction"></app-documents>
+            </div>
+
+            <hr class="mt-3">
+            <div class="row mx-0 px-0 clickable" (click)="onOpenClosePaymentsMenu()">
+              <div class="col-10 text-center sub-text"><span class="fs-3">Останні благодійні пожертви</span></div>
+              <div class="col-2 text-center">
+                <span class="bi bi-caret-down fs-3" *ngIf="!paymentsMenuOpen"></span>
+                <span class="bi bi-caret-up-fill fs-3" *ngIf="paymentsMenuOpen"></span>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3 overflow-hidden" [@menuInOut] *ngIf="paymentsMenuOpen">
+              <app-payments [payments]="payments"></app-payments>
+            </div>
+
+            <hr class="mt-3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-fixed charity-button text-center">
+      <button class="btn-custom sub-text mt-4 fs-1" (click)="donateModal = true;">Підтримати</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="donateModal">
+  <div class="donate-input-modal" (click)="donateModal = false;">
+  </div>
+  <div class="donate-input-box p-3">
+    <h2 class="main-text mt-3" style="text-align: justify">Введіть інформацію для підтвердження платежу</h2>
+    <hr>
+    <div class="row">
+      <div class="offset-lg-2 col-lg-8 col-12">
+        <label for="cardNumber" class="sub-text fs-3 fw-bold">Номер карти:</label>
+        <input type="text" class="form-control fs-2 fw-bold text-center col-6" id="cardNumber"
+               placeholder="**** **** **** ****" maxlength="16">
+      </div>
+
+      <div class="offset-lg-2 col-lg-5 col-7 mt-3">
+        <label for="cardDate" class="sub-text fs-3 fw-bold">Дійсна до:</label>
+        <input type="text" class="form-control mt-3 fs-2 fw-bold text-center" id="cardDate" placeholder="mm/yy">
+      </div>
+
+      <div class="offset-lg-1 col-lg-2 col-5 mt-3">
+        <label for="cardCVV" class="sub-text fs-3 fw-bold">CVV:</label>
+        <input type="password" class="form-control mt-3 fs-2 fw-bold text-center" id="cardCVV" placeholder="***"
+               maxlength="3">
+      </div>
+
+      <div class="offset-lg-3 col-lg-6 col-12 mt-3">
+        <label for="sum" class="sub-text fs-3 fw-bold">Сума:</label>
+        <input type="number" class="form-control mt-3 fs-2 fw-bold text-center" id="sum">
+      </div>
+
+      <div class="offset-lg-3 col-lg-6 col-12 mt-3">
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">25.00</button>
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">50.00</button>
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">100.00</button>
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">200.00</button>
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">500.00</button>
+        <button class="btn-custom sub-text fs-4 p-2 me-3 mb-2">1000.00</button>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="col-12 text-center mt-4">
+      <button class="btn-custom sub-text fs-2 p-2">Підтвердити платіж</button>
+    </div>
+  </div>
+</div>
+

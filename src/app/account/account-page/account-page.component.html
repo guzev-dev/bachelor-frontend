@@ -1,0 +1,114 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="account">
+    <div class="col-12 col-lg-8 offset-lg-2 mt-4">
+      <div class="row">
+
+        <div class="col-12">
+          <h1 class="main-text--sub-color mb-4 text-center"
+              style="font-size: 4rem; text-align: justify; letter-spacing: .2rem;">
+            Особистий акаунт #{{account.id}}
+          </h1>
+        </div>
+
+        <div class="col-xxl-5 col-xl-6 col-lg-7 col-12 profile-photo-box">
+          <img class="profile-photo position-absolute"
+               [src]="(imgURL) ? imgURL : './assets/images/no-profile-photo-image.png'" alt="profile-photo">
+          <div class="change-profile-photo-box">
+            <p class="change-profile-photo-text">Змінити фото <span class="bi bi-images"></span></p>
+          </div>
+        </div>
+
+        <div class="col-xxl-7 col-xl-6 col-lg-5 col-12 mt-3">
+          <div class="row">
+            <div class="col-6">
+              <p class="sub-text fs-2 mb-0 fst-italic overflow-hidden">Ім'я:</p>
+              <p class="sub-text fs-1 fw-bolder mt-0 overflow-hidden">{{account.firstName}}</p>
+            </div>
+            <div class="col-6">
+              <p class="sub-text fs-2 mb-0 fst-italic overflow-hidden">Прізвище:</p>
+              <p class="sub-text fs-1 fw-bolder mt-0 overflow-hidden">{{account.lastName}}</p>
+            </div>
+            <hr>
+            <div class="col-6">
+              <p class="sub-text fs-2 mb-0 fst-italic overflow-hidden">Електронна пошта:</p>
+              <p class="sub-text fs-1 fw-bolder mt-0 overflow-hidden">{{account.email}}</p>
+            </div>
+            <div class="col-6">
+              <p class="sub-text fs-2 mb-0 fst-italic overflow-hidden">Дата останнього просування:</p>
+              <p class="sub-text fs-1 fw-bolder mt-0 overflow-hidden">{{account.upvoteDate}}</p>
+            </div>
+            <div class="col-12 mt-3 text-end">
+              <button class="btn-custom sub-text fs-2" (click)="onLogout()">Вийти з акаунту</button>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-3">
+
+        <div class="col-10 text-center"><span class="sub-text fs-1">Змінити пароль від акаунту</span></div>
+        <div class="col-2 text-center" (click)="onOpenCloseChangePasswordMenu()">
+          <span class="bi bi-caret-down fs-2" *ngIf="!changePasswordMenuOpen"></span>
+          <span class="bi bi-caret-up-fill fs-2" *ngIf="changePasswordMenuOpen"></span>
+        </div>
+
+        <div class="col-12 overflow-hidden" [@menuInOut] *ngIf="changePasswordMenuOpen">
+          <hr>
+          <form class="row my-3" [formGroup]="changePasswordForm">
+            <div class="offset-xl-1 col-xl-4 col-sm-6 col-12 mt-3">
+              <label for="oldPassword" class="form-label sub-text fs-2">Старий пароль:</label>
+              <input type="password" class="form-control" id="oldPassword" formControlName="oldPassword"
+                     [ngClass]="{'is-invalid': oldPasswordInvalid()}">
+            </div>
+
+            <div class="offset-xl-2 col-xl-4 col-sm-6 col-12 mt-3">
+              <label for="newPassword" class="form-label sub-text fs-2">Новий пароль:</label>
+              <input type="password" class="form-control" id="newPassword" formControlName="newPassword"
+                     [ngClass]="{'is-invalid': newPasswordInvalid() || !newPasswordsMatch()}">
+
+              <label for="newPasswordCheck" class="form-label sub-text fs-2 mt-3">Повторіть новий пароль:</label>
+              <input type="password" class="form-control" id="newPasswordCheck" formControlName="newPasswordCheck"
+                     [ngClass]="{'is-invalid': newPasswordCheckInvalid() || !newPasswordsMatch()}">
+            </div>
+
+            <div class="col-12 alert-custom--error p-3 mt-3"
+                 *ngIf="oldPasswordInvalid() || newPasswordInvalid() || newPasswordCheckInvalid() || !newPasswordsMatch() || passwordChanged === false">
+              <p class="sub-text mb-0 fs-4">Помилка</p>
+              <ul class="fs-5 mb-0">
+                <li class="sub-text text-decoration-underline"
+                    *ngIf="oldPasswordInvalid() || newPasswordInvalid() || newPasswordCheckInvalid()">Мінімальна довжина
+                  паролю - 8 символів.
+                </li>
+                <li class="sub-text text-decoration-underline" *ngIf="!newPasswordsMatch()">Нові паролі не збігаються.
+                </li>
+                <li class="sub-text text-decoration-underline" *ngIf="passwordChanged === false">Не вдається змінити пароль.</li>
+              </ul>
+            </div>
+
+            <div class="col-12 alert-custom--success p-3 mt-3" *ngIf="passwordChanged === true">
+              <p class="sub-text mb-0 fs-4">Пароль успішно змінено.</p>
+            </div>
+
+            <div class="col-12 text-center mt-3">
+              <button class="btn-custom sub-text fs-2" [disabled]="changePasswordForm.invalid || !newPasswordsMatch()"
+                      (click)="onChangePassword()">
+                Змінити пароль
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <hr class="mt-3">
+        <div class="col-10 text-center"><span class="sub-text fs-1">Останні благодійні пожертви</span></div>
+        <div class="col-2 text-center" (click)="onOpenClosePaymentsMenu()">
+          <span class="bi bi-caret-down fs-2" *ngIf="!paymentsMenuOpen"></span>
+          <span class="bi bi-caret-up-fill fs-2" *ngIf="paymentsMenuOpen"></span>
+        </div>
+
+        <div class="offset-lg-2 col-lg-8 col-12 mt-3 overflow-hidden" [@menuInOut] *ngIf="paymentsMenuOpen">
+          <app-payments [payments]="payments"></app-payments>
+        </div>
+
+        <hr class="mt-3">
+      </div>
+    </div>
+  </div>
+</div>

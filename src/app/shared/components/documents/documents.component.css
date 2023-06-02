@@ -1,0 +1,8 @@
+.document-box {
+  cursor: pointer;
+}
+
+.document-box:hover {
+  background-color: var(--bg-color);
+  filter: brightness(90%);
+}

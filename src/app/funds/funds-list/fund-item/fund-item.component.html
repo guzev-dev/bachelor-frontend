@@ -1,0 +1,32 @@
+<div class="row p-4 fund-box" [routerLink]="['/funds',fundItem.id]">
+  <div class="col-12">
+    <h1 class="main-text--sub-color">{{fundItem.name}}</h1>
+  </div>
+  <hr>
+
+  <div class="col-xl-4 col-12">
+    <img [src]="(imgURL) ? imgURL : './assets/images/no-image.png'" alt="fund-logo">
+  </div>
+
+  <div class="col-xl-4 col-12 sub-text fund-info fund-info-border categories">
+    <span class="fw-bold">Сфери діяльності:</span>
+    <ul class="categories-box">
+      <li class="mb-0" *ngFor="let category of fundItem.categories">
+        <div class="d-flex justify-content-between">
+          <span>{{category.name}}</span>
+          <span class="bi" [ngClass]="category.iconClass"></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-xl-4 col-12 sub-text fund-info">
+    <span class="fw-bold">Локації:</span>
+    <ul class="categories-box">
+      <li class="mb-0" *ngFor="let location of fundItem.locations">
+          <span>{{location}}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>

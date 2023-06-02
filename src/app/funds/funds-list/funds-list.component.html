@@ -1,0 +1,75 @@
+<div class="p-3 me-0 row mx-lg-4 mx-0" *ngIf="funds && locations && sortOrderSelect">
+
+  <div class="col-xxl-2 col-lg-3 col-12 side-menu" [ngClass]="{'right': sideMenuRight}">
+
+
+    <div class="position-sticky location-menu p-2">
+      <div class="row">
+        <div class="col-lg-12 col-11">
+          <input type="text" class="form-control fw-bold" placeholder="Знайти фонд за назвою"
+                 [(ngModel)]="fundName" (input)="onSearch()">
+        </div>
+        <div class="col-1 d-lg-none" (click)="changeMobileMenuHidden()">
+          <span class="bi bi-caret-down fs-3" *ngIf="mobileMenuHidden"></span>
+          <span class="bi bi-caret-up-fill fs-3" *ngIf="!mobileMenuHidden"></span>
+        </div>
+      </div>
+
+      <div>
+        <h1 class="sub-text mt-3 fw-bold">
+          Локація:
+          <button type="button" class="border-0 mt-1 float-end clear-btn" *ngIf="selectedLocation"
+                  (click)="clearSelectedLocation()">Х
+          </button>
+        </h1>
+
+        <div class="position-relative">
+          <select class="sub-text fs-4 fst-italic locations-select"
+                  name="location" id="location"
+                  [(ngModel)]="selectedLocation" (change)="onLocationSelect()">
+            <option *ngFor="let option of locations" [selected]="option === selectedLocation">
+              {{option}}
+            </option>
+          </select>
+          <p class="select-placeholder sub-text fs-4 fst-italic" *ngIf="!selectedLocation">Не вибрано</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-xxl-10 col-lg-9 col-12 py-2">
+
+    <div class="col-12 mb-3">
+      <div class="text-end">
+
+        <div class="sub-text fs-4 d-inline-block ms-4">
+          <label class="me-2" for="sort">Сортувати: </label>
+          <select name="sort" id="sort" [(ngModel)]="selectedOrder" (change)="onSortOrderSelect()">
+            <option *ngFor="let option of sortOrderSelect" [selected]="option === selectedOrder">{{option}}</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row px-3">
+
+      <div class="col-lg-6 col-12 gx-5 gy-4" *ngFor="let fund of funds.value">
+        <app-fund-item [fundItem]="fund"></app-fund-item>
+      </div>
+
+      <div class="col-12 text-center fs-3 mt-4">
+        <button class="btn-custom sub-text px-3" [disabled]="funds.firstPage" (click)="onPreviousPage()">
+          <
+        </button>
+        |
+        <button class="btn-custom sub-text px-3" [disabled]="funds.lastPage" (click)="onNextPage()">
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

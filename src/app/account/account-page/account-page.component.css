@@ -1,0 +1,48 @@
+.profile-photo-box {
+  height: 40vh;
+}
+
+.profile-photo {
+  height: 40vh;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  float: left;
+}
+
+.change-profile-photo-text, .change-profile-photo-text {
+  display: none;
+}
+
+.profile-photo-box:hover .change-profile-photo-box {
+  display: block;
+  position: relative;
+  height: 40vh; aspect-ratio: 1/1;
+  top: 0;
+  left: 0;
+  background-color: var(--header-color);
+  opacity: 70%;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.profile-photo-box:hover .change-profile-photo-box .change-profile-photo-text {
+  position: relative;
+  display: block;
+  top: 27.5vh;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--main-text-color);
+}
+
+@media (max-width: 576px) {
+
+  .profile-photo {
+    width: 95vw !important;
+    aspect-ratio: 1 / 1;
+  }
+
+  .profile-photo:hover ~ .change-profile-photo-box {
+    width: 95vw; aspect-ratio: 1/1;
+  }
+
+}
