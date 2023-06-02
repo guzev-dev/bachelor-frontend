@@ -5,16 +5,21 @@
 
 ### [Серверна частина кваліфікаційної роботи](https://github.com/guzev-dev/bachelor-backend)
 
-Деякі особливості:
-* зручний UX: <br />
+## Деякі особливості:
+* зручний UX:
+
 ![charity-screenshot](https://drive.google.com/uc?export=view&id=1fTdMKAK4bmkbhF60UPfLLydc_XJZzjmz)
-<br />
+
 ![charity-hover-screenshot](https://drive.google.com/uc?export=view&id=1jOUJP34W_8IA8S4rKkKjXOnPUswAJQNa)
-* адаптивний дизайн: <br />
+
+* адаптивний дизайн:
+
 ![charity-mobile-screenshot](https://drive.google.com/uc?export=view&id=1Byg24wmIjtLSSwW5t-Cj8dXBgUhvc6Aj)
-* світла та темні теми інтерфейсу: <br />
+
+* світла та темні теми інтерфейсу:
+
 ![charity-light-screenshot](https://drive.google.com/uc?export=view&id=1n5oJ6AclLMUU6cHB1NtasHJKhXAQIQvY)
-<br />
+
 ![charity-dark-screenshot](https://drive.google.com/uc?export=view&id=1nveON19LxCDk31QSJ88qy1zTZUyPYi-o)
 
 *!!! Використані у застосунку зображення (фото профілю користувачів, фото для благодійних зборів,
