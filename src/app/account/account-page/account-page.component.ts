@@ -41,7 +41,14 @@ export class AccountPageComponent implements OnInit, OnDestroy {
         (state) => {
           this.account = state.account;
           this.passwordChanged = state.passwordChanged;
-          this.payments = state.accountPayments;
+          if (state.accountPayments)
+            this.payments = state.accountPayments.map(payment => {
+              return {
+                ...payment,
+                paidBy: {firstName: this.account.firstName, lastName: this.account.lastName},
+                anonymously: false
+              };
+            });
           if (this.account)
             this.readPhoto()
         }

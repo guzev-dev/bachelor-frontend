@@ -12,7 +12,7 @@
 
   <div class="d-flex" *ngFor="let payment of payments; let ind = index;">
     <div class="col-5 fst-italic px-2 payments-border text-justify payment-charity"
-    [ngClass]="{'payments-border__bottom-left': ind === payments.length - 1}">
+    [ngClass]="{'payments-border__bottom-left': ind === payments.length - 1}" [routerLink]="['/charity', payment.refersTo.id]">
       {{payment.refersTo.name}}</div>
     <div class="col-4 fst-italic px-2 payments-border text-justify">
       <p>{{(payment.anonymously) ? 'Анонімний користувач' : (payment.paidBy.lastName + ' ' + payment.paidBy.firstName)}}</p></div>
