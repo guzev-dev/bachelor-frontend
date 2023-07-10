@@ -81,7 +81,6 @@ export function accountReducer(state: AccountState = initialState,
     }
 
     case fromAccountActions.VOTED: {
-      console.log("VOTED")
       return {
         ...state,
         canVote: false
